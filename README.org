@@ -1,0 +1,63 @@
+* ob-d2
+Generate [[https://d2lang.com/tour/intro][D2]] diagrams using emacs org-mode.
+
+   #+begin_src org
+     ,#+begin_src d2 :file test.png
+x -> y: hello world
+     ,#+end_src
+   #+end_src
+     #+begin_src d2 :file test.png
+x -> y: hello world
+     #+end_src
+
+     #+RESULTS:
+     [[file:test.png]]
+
+* Setup
+1. Install =ob-d2.el= from this repo
+2. [[https://d2lang.com/tour/install][Follow the install instructions for d2]]
+3. Specify =d2= executable path:
+  #+begin_src bash
+which d2
+  #+end_src
+
+   #+begin_src elisp
+  (setq ob-d2-cli-path "/your/installation/path/d2")
+  #+end_src
+
+  #+RESULTS:
+  : /usr/local/bin/d2
+4. Add =d2= to =org-babel-load-languages=
+
+  #+begin_src elisp
+    (org-babel-do-load-languages
+        'org-babel-load-languages
+        ;; Your other babel-languages
+        '((d2 . t)))
+  #+end_src
+
+  #+RESULTS:
+5. Add the lines before to your =init.el= to get persistence
+
+6. Open =org-mode= buffer and create an =org-babel= source block:
+   #+begin_src org
+     ,#+begin_src d2 :file test.png
+x -> y: hello world
+     ,#+end_src
+   #+end_src
+7. Exporting the =org-mode= document or invoking the =org-babel-execute-src-block= function to generate diagram.
+
+* TODO Customization
+Support other command line arguments
+#+begin_example
+ -h, --host string     $HOST       host listening address when used with watch (default "localhost")
+  -p, --port string     $PORT       port listening address when used with watch (default "0")
+  -b, --bundle          $D2_BUNDLE  when outputting SVG, bundle all assets and layers into the output file. (default true)
+  -d, --debug           $DEBUG      print debug logs. (default false)
+  -l, --layout string   $D2_LAYOUT  the layout engine used. (default "dagre")
+  -t, --theme int       $D2_THEME   the diagram theme ID. For a list of available options, see https://oss.terrastruct.com/d2
+#+end_example
+
+* TODO =--watch= support
+Python has =:session= where we can send the code to long-running interpreter.
+Maybe we can achieve something similar.
