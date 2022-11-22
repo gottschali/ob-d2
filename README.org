@@ -1,17 +1,18 @@
 * ob-d2
+
 Generate [[https://d2lang.com/tour/intro][D2]] diagrams using emacs org-mode.
+This project is based on [[https://github.com/arnm/ob-mermaid][ob-mermaid]].
 
    #+begin_src org
-     ,#+begin_src d2 :file test.png
+     ,#+begin_src d2 :file test.svg
 x -> y: hello world
      ,#+end_src
    #+end_src
-     #+begin_src d2 :file test.png
+     #+begin_src d2 :file test.svg
 x -> y: hello world
      #+end_src
-
      #+RESULTS:
-     [[file:test.png]]
+     [[file:test.svg]]
 
 * Setup
 1. Install =ob-d2.el= from this repo
