@@ -45,7 +45,8 @@ x -> y: hello world
    #+end_src
 7. Exporting the =org-mode= document or invoking the =org-babel-execute-src-block= function to generate diagram.
 
-* TODO Customization
+* TODO
+** TODO Customization
 Support other command line arguments
 #+begin_example
  -h, --host string     $HOST       host listening address when used with watch (default "localhost")
@@ -56,6 +57,6 @@ Support other command line arguments
   -t, --theme int       $D2_THEME   the diagram theme ID. For a list of available options, see https://oss.terrastruct.com/d2
 #+end_example
 
-* TODO =--watch= support
+** TODO =--watch= support
 Python has =:session= where we can send the code to long-running interpreter.
 Maybe we can achieve something similar.
