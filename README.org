@@ -46,17 +46,27 @@ x -> y: hello world
 7. Exporting the =org-mode= document or invoking the =org-babel-execute-src-block= function to generate diagram.
 
 * TODO
-** TODO Customization
+** DONE Customization
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2022-11-23 Wed 12:22]
+:END:
 Support other command line arguments
 #+begin_example
- -h, --host string     $HOST       host listening address when used with watch (default "localhost")
-  -p, --port string     $PORT       port listening address when used with watch (default "0")
-  -b, --bundle          $D2_BUNDLE  when outputting SVG, bundle all assets and layers into the output file. (default true)
-  -d, --debug           $DEBUG      print debug logs. (default false)
-  -l, --layout string   $D2_LAYOUT  the layout engine used. (default "dagre")
-  -t, --theme int       $D2_THEME   the diagram theme ID. For a list of available options, see https://oss.terrastruct.com/d2
+ -b, --bundle          $D2_BUNDLE  when outputting SVG, bundle all assets and layers into the output file. (default true)
+ -d, --debug           $DEBUG      print debug logs. (default false)
+ -l, --layout string   $D2_LAYOUT  the layout engine used. (default "dagre")
+ -t, --theme int       $D2_THEME   the diagram theme ID. For a list of available options, see https://oss.terrastruct.com/d2
 #+end_example
 
 ** TODO =--watch= support
 Python has =:session= where we can send the code to long-running interpreter.
 Maybe we can achieve something similar.
+#+begin_example
+--watch
+-h, --host string     $HOST       host listening address when used with watch (default "localhost")
+-p, --port string     $PORT       port listening address when used with watch (default "0")
+#+end_example
+
+** TODO LSP support for the code blocks
+
+=+org-babel-mode-alist= in Doom.

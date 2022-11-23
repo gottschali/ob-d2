@@ -21,7 +21,7 @@
 
 ;;; Commentary:
 
-;; Org-Babel support for evaluating mermaid diagrams.
+;; Org-Babel support for evaluating d2 diagrams.
 
 ;;; Requirements:
 ;; https://d2lang.com/tour/install
@@ -32,44 +32,35 @@
 
 (defvar org-babel-default-header-args:d2
   '((:results . "file") (:exports . "results"))
-  "Default arguments for evaluatiing a mermaid source block.")
+  "Default arguments for evaluating a d2 source block.")
 
 (defcustom ob-d2-cli-path nil
-  "Path to mermaid.cli executable."
+  "Path to d2 executable."
   :group 'org-babel
   :type 'string)
 
 (defun org-babel-execute:d2 (body params)
   (let* ((out-file (or (cdr (assoc :file params))
                        (error "d2 requires a \":file\" header argument")))
+	 (bundle (cdr (assoc :bundle params)))
+	 (_debug (cdr (assoc :debug params)))
+	 (layout (cdr (assoc :layout params)))
 	 (theme (cdr (assoc :theme params)))
-	 (width (cdr (assoc :width params)))
-	 (height (cdr (assoc :height params)))
-	 (background-color (cdr (assoc :background-color params)))
-	 (mermaid-config-file (cdr (assoc :mermaid-config-file params)))
-	 (css-file (cdr (assoc :css-file params)))
-	 (pupeteer-config-file (cdr (assoc :pupeteer-config-file params)))
+
          (temp-file (org-babel-temp-file "d2-"))
          (d2 (or ob-d2-cli-path
                    (executable-find "d2")
-                   (error "`ob-mermaid-cli-path' is not set and d2 is not in `exec-path'")))
+                   (error "`ob-d2-cli-path' is not set and d2 is not in `exec-path'")))
          (cmd (concat (shell-quote-argument (expand-file-name d2))
                       " " (org-babel-process-file-name temp-file)
                       " " (org-babel-process-file-name out-file)
+		      (when (not bundle) " --bundle=false ")
+		      (when _debug " --debug ")
+		      (when layout
+			(concat " --layout " layout))
 		      (when theme
-			(concat " -t " theme))
-		      (when background-color
-			(concat " -b " background-color))
-		      (when width
-			(concat " -w " width))
-		      (when height
-			(concat " -H " height))
-		      (when mermaid-config-file
-			(concat " -c " (org-babel-process-file-name mermaid-config-file)))
-		      (when css-file
-			(concat " -C " (org-babel-process-file-name css-file)))
-                      (when pupeteer-config-file
-                        (concat " -p " (org-babel-process-file-name pupeteer-config-file))))))
+			(concat " --theme " theme))
+                      )))
     (unless (file-executable-p d2)
       ;; cannot happen with `executable-find', so we complain about
       ;; `ob-d2-cli-path'
