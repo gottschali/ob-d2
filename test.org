@@ -1,0 +1,94 @@
+#+title: Test
+* Examples
+** Shapes
+#+begin_src d2 :file shapes.svg
+pg: PostgreSQL
+Cloud: my cloud
+Cloud.shape: cloud
+SQLite; Cassandra
+#+end_src
+
+#+RESULTS:
+[[file:shapes.svg]]
+** Connections
+#+begin_src d2 :file connections.svg
+Write Replica Canada <-> Write Replica Australia
+Read Replica <- Master
+Write Replica -> Master
+Read Replica 1 -- Read Replica 2
+#+end_src
+
+#+RESULTS:
+[[file:connections.svg]]
+
+** Containers
+#+begin_src d2 :file containers.svg
+server
+# Declares a shape inside of another shape
+server.process
+# Can declare the container and child in same line
+im a parent.im a child
+# Since connections can also declare keys, this works too
+apartment.Bedroom.Bathroom -> office.Spare Room.Bathroom: Portal
+#+end_src
+
+#+RESULTS:
+[[file:containers.svg]]
+* TODO Icons & Images
+#+begin_src d2 :file external.svg
+server: {
+  shape: image
+  icon: https://icons.terrastruct.com/tech/022-server.svg
+}
+my network: {
+  icon: https://icons.terrastruct.com/infra/019-network.svg
+}
+github: {
+  shape: image
+  icon: https://icons.terrastruct.com/dev/github.svg
+}
+server -> github
+#+end_src
+
+#+RESULTS:
+[[file:external.svg]]
+* Layouts
+** Dagre
+#+begin_src d2 :file dagre.svg :layout dagre
+A -> B
+B -> C
+A -> C
+A -> D
+D -> C
+#+end_src
+
+#+RESULTS:
+[[file:dagre.svg]]
+
+** ELK
+
+#+begin_src d2 :file elk.svg :layout elk
+A -> B
+B -> C
+A -> C
+A -> D
+D -> C
+#+end_src
+
+#+RESULTS:
+[[file:elk.svg]]
+
+** TALA
+*Requires seperate install*
+They want to sell you a LICENSE.
+[[https://github.com/terrastruct/TALA]]
+#+begin_src d2 :file tala.svg :layout tala
+A -> B
+B -> C
+A -> C
+A -> D
+D -> C
+#+end_src
+
+#+RESULTS:
+[[file:tala.svg]]
